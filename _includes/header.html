@@ -1,0 +1,28 @@
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+            
+        <!-- home url -->
+        {% if page.url == "/" %}
+            <li class="active"><a href="/" class="active"><i class="fa fa-code"></i>Home</a></li> 
+        {% else %}
+            <li><a href="/"><i class="fa fa-code"></i>Home</a></li>
+        {% endif %}
+            
+        <!-- other pages -->
+		{% for node in site.pages %}
+            {% if node.url == "/" %}
+                <!-- home url already handled -->
+            {% else %}
+                {% unless node.exclude_from_nav %}
+                    {% if page.url == node.url %}
+                        <li class="active"><a href="{{node.url}}" class="active">{{node.title}}</a></li>
+                    {% else %}
+                        <li><a href="{{node.url}}">{{node.title}}</a></li>
+                    {% endif %}
+                {% endunless %}
+            {% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+</nav>
